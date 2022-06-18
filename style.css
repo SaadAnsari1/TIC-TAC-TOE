@@ -9,6 +9,9 @@
     height: 100vh;
     padding-top: 1px;
 }
+p{
+  color: #fff;  
+}
 
 .title {
     color: white;
@@ -23,6 +26,7 @@ a{
   font-size: 8px;
   text-decoration: none;
   text-decoration-line: none;
+  color: green;
 }
 .display {
     color: white;

@@ -3,7 +3,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const playerDisplay = document.querySelector('.display-player');
     const resetButton = document.querySelector('#reset');
     const announcer = document.querySelector('.announcer');
+    let PlaySound = new Audio('reset.mp3');
+    let ResetSound = new Audio('reset.mp3');
+    let OverSound = new Audio('WIN.mp3');
 
+    
     let board = ['', '', '', '', '', '', '', '', ''];
     let currentPlayer = 'X';
     let isGameActive = true;
@@ -58,6 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     const announce = (type) => {
+        OverSound.play();
         switch(type){
             case PLAYERO_WON:
                 announcer.innerHTML = 'Player <span class="playerO">O</span> Win';
@@ -97,12 +102,15 @@ window.addEventListener('DOMContentLoaded', () => {
             updateBoard(index);
             handleResultValidation();
             changePlayer();
+            PlaySound.play();
         }
     }
     
     const resetBoard = () => {
         board = ['', '', '', '', '', '', '', '', ''];
         isGameActive = true;
+        OverSound.pause();
+        ResetSound.play();
         announcer.classList.add('hide');
 
         if (currentPlayer === 'O') {
@@ -117,7 +125,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     tiles.forEach( (tile, index) => {
-        tile.addEventListener('click', () => userAction(tile, index));
+        tile.addEventListener('click', () => 
+            userAction(tile, index));
     });
 
     resetButton.addEventListener('click', resetBoard);
